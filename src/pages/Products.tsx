@@ -4,6 +4,9 @@ import { ProductCard } from "@/components/ProductCard";
 import { Navigation } from "@/components/Navigation";
 import { ProductFilters } from "@/components/ProductFilters";
 import { Product } from "@/types/product";
+import { Button } from "@/components/ui/button";
+import { ShoppingCart } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const products: Product[] = [
   {
@@ -81,6 +84,7 @@ const products: Product[] = [
 ];
 
 const Products = () => {
+  const { toast } = useToast();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedBrand, setSelectedBrand] = useState("all");
   const [selectedPriceRange, setSelectedPriceRange] = useState("All");
@@ -117,6 +121,17 @@ const Products = () => {
     });
   }, [selectedCategory, selectedBrand, selectedPriceRange]);
 
+  const handleAddToCart = (product: Product) => {
+    toast({
+      title: "Added to Cart",
+      description: `${product.name} has been added to your cart.`,
+    });
+  };
+
+  const handleBuyNow = (product: Product) => {
+    window.location.href = `/checkout/${product.id}`;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
@@ -146,7 +161,25 @@ const Products = () => {
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} {...product} />
+                <div key={product.id} className="flex flex-col">
+                  <ProductCard {...product} />
+                  <div className="mt-4 space-y-2">
+                    <Button 
+                      className="w-full"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      <ShoppingCart className="mr-2 h-4 w-4" />
+                      Add to Cart
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => handleBuyNow(product)}
+                    >
+                      Buy Now
+                    </Button>
+                  </div>
+                </div>
               ))}
             </div>
             
