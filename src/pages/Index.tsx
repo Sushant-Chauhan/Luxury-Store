@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { ProductCard } from "@/components/ProductCard";
 import { Newsletter } from "@/components/Newsletter";
+import { Navigation } from "@/components/Navigation";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const featuredProducts = [
   {
@@ -32,6 +35,8 @@ const featuredProducts = [
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <Navigation />
+      
       {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -57,14 +62,15 @@ const Index = () => {
             Explore our curated collection of premium products designed for those
             who appreciate quality and elegance.
           </motion.p>
-          <motion.button
+          <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="rounded-lg bg-gray-900 px-8 py-3 text-white transition-colors hover:bg-gray-800"
           >
-            Shop Now
-          </motion.button>
+            <Button asChild size="lg">
+              <Link to="/products">Shop Now</Link>
+            </Button>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -78,6 +84,11 @@ const Index = () => {
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Button asChild variant="outline">
+              <Link to="/products">View All Products</Link>
+            </Button>
           </div>
         </div>
       </section>
