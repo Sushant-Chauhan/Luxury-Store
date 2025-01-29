@@ -17,6 +17,20 @@ const products: Product[] = [
     category: "Accessories",
     brand: "Timex",
     description: "Elegant timepiece with premium materials and precise movement.",
+    rating: 4.5,
+    reviews: [
+      {
+        id: 1,
+        userName: "John D.",
+        rating: 5,
+        comment: "Excellent quality and design!",
+        date: "2024-02-15"
+      }
+    ],
+    returnPolicy: "30 days",
+    replacementDays: 7,
+    stockStatus: "In Stock",
+    features: ["Water resistant", "Premium leather strap", "Sapphire crystal"]
   },
   {
     id: 2,
@@ -26,6 +40,20 @@ const products: Product[] = [
     category: "Accessories",
     brand: "Heritage",
     description: "Handcrafted leather wallet with multiple card slots.",
+    rating: 4.2,
+    reviews: [
+      {
+        id: 1,
+        userName: "Mike R.",
+        rating: 4,
+        comment: "Great quality leather!",
+        date: "2024-02-10"
+      }
+    ],
+    returnPolicy: "14 days",
+    replacementDays: 5,
+    stockStatus: "In Stock",
+    features: ["Genuine leather", "Multiple card slots", "RFID protection"]
   },
   {
     id: 3,
@@ -35,6 +63,20 @@ const products: Product[] = [
     category: "Electronics",
     brand: "SoundCore",
     description: "High-quality wireless earbuds with noise cancellation.",
+    rating: 4.8,
+    reviews: [
+      {
+        id: 1,
+        userName: "Sarah L.",
+        rating: 5,
+        comment: "Amazing sound quality!",
+        date: "2024-02-12"
+      }
+    ],
+    returnPolicy: "30 days",
+    replacementDays: 10,
+    stockStatus: "Limited Stock",
+    features: ["Active noise cancellation", "40h battery life", "Water resistant"]
   },
   {
     id: 4,
@@ -44,6 +86,20 @@ const products: Product[] = [
     category: "Electronics",
     brand: "EchoTech",
     description: "Voice-controlled smart speaker with premium sound.",
+    rating: 4.3,
+    reviews: [
+      {
+        id: 1,
+        userName: "David M.",
+        rating: 4,
+        comment: "Great sound, easy setup",
+        date: "2024-02-08"
+      }
+    ],
+    returnPolicy: "30 days",
+    replacementDays: 7,
+    stockStatus: "In Stock",
+    features: ["Voice control", "Multi-room audio", "Smart home integration"]
   },
   {
     id: 5,
@@ -53,6 +109,20 @@ const products: Product[] = [
     category: "Accessories",
     brand: "ErgoMax",
     description: "Adjustable aluminum laptop stand for better ergonomics.",
+    rating: 4.6,
+    reviews: [
+      {
+        id: 1,
+        userName: "Emma K.",
+        rating: 5,
+        comment: "Perfect for WFH setup!",
+        date: "2024-02-14"
+      }
+    ],
+    returnPolicy: "14 days",
+    replacementDays: 5,
+    stockStatus: "In Stock",
+    features: ["Adjustable height", "Aluminum build", "Portable design"]
   },
   {
     id: 6,
@@ -62,6 +132,20 @@ const products: Product[] = [
     category: "Electronics",
     brand: "TechGear",
     description: "Ergonomic wireless mouse with precision tracking.",
+    rating: 4.4,
+    reviews: [
+      {
+        id: 1,
+        userName: "Tom H.",
+        rating: 4,
+        comment: "Comfortable and responsive",
+        date: "2024-02-11"
+      }
+    ],
+    returnPolicy: "14 days",
+    replacementDays: 5,
+    stockStatus: "In Stock",
+    features: ["Ergonomic design", "Long battery life", "Silent clicks"]
   },
   {
     id: 7,
@@ -71,6 +155,20 @@ const products: Product[] = [
     category: "Electronics",
     brand: "TechGear",
     description: "Premium mechanical keyboard with RGB backlight.",
+    rating: 4.7,
+    reviews: [
+      {
+        id: 1,
+        userName: "Alice B.",
+        rating: 5,
+        comment: "Amazing typing experience!",
+        date: "2024-02-13"
+      }
+    ],
+    returnPolicy: "30 days",
+    replacementDays: 7,
+    stockStatus: "In Stock",
+    features: ["Mechanical switches", "RGB backlight", "Aluminum frame"]
   },
   {
     id: 8,
@@ -80,6 +178,20 @@ const products: Product[] = [
     category: "Bags",
     brand: "Heritage",
     description: "Spacious leather backpack with laptop compartment.",
+    rating: 4.5,
+    reviews: [
+      {
+        id: 1,
+        userName: "Chris P.",
+        rating: 4,
+        comment: "Perfect for daily commute",
+        date: "2024-02-09"
+      }
+    ],
+    returnPolicy: "30 days",
+    replacementDays: 7,
+    stockStatus: "In Stock",
+    features: ["Genuine leather", "Laptop compartment", "Water resistant"]
   },
 ];
 
