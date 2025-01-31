@@ -64,12 +64,12 @@ export const products: Product[] = [
   {
     id: 3,
     name: "Wireless Earbuds",
-    price: 16999,
+    price: 18999,
     image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&q=80",
     category: "Electronics",
     brand: "SoundCore",
     description: "High-quality wireless earbuds with noise cancellation. Plus battery life is great",
-    rating: 4.6,
+    rating: 4.7,
     reviews: [
       {
         id: 1,
@@ -84,6 +84,7 @@ export const products: Product[] = [
     stockStatus: "Limited Stock",
     features: [
       "Active noise cancellation",
+      "Comfortable",
       "30-hour battery life",
       "Water resistant"
     ]
@@ -91,7 +92,7 @@ export const products: Product[] = [
   {
     id: 4,
     name: "Smart Speaker",
-    price: 12499,
+    price: 13499,
     image: "https://images.unsplash.com/photo-1543512214-318c7553f230?w=800&q=80",
     category: "Electronics",
     brand: "EchoTech",
