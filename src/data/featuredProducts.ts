@@ -9,7 +9,7 @@ export const featuredProducts: Product[] = [
     category: "Accessories",
     brand: "Timex",
     description: "Elegant timepiece with premium materials and precise movement.",
-    rating: 4.5,
+    rating: 4.6,
     reviews: [
       {
         id: 1,
@@ -43,7 +43,7 @@ export const featuredProducts: Product[] = [
         userName: "Mike R.",
         rating: 5,
         comment: "Perfect size and great leather quality",
-        date: "2024-02-10"
+        date: "2024-04-10"
       }
     ],
     returnPolicy: "Returnable",
