@@ -10,7 +10,7 @@ export const products: Product[] = [
   {
     id: 1,
     name: "Premium Watch",
-    price: 24999,
+    price: 25999,
     image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=800&q=80",
     category: "Accessories",
     brand: "Timex",
@@ -25,7 +25,7 @@ export const products: Product[] = [
         date: "2024-02-15"
       }
     ],
-    returnPolicy: "30 days",
+    returnPolicy: "31 days",
     replacementDays: 10,
     stockStatus: "In Stock",
     features: [
@@ -68,7 +68,7 @@ export const products: Product[] = [
     image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&q=80",
     category: "Electronics",
     brand: "SoundCore",
-    description: "High-quality wireless earbuds with noise cancellation.",
+    description: "High-quality wireless earbuds with noise cancellation. Plus battery life is great",
     rating: 4.6,
     reviews: [
       {
