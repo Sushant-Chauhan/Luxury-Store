@@ -12,6 +12,30 @@ export const ProductGrid = ({ products }: ProductGridProps) => {
   const { toast } = useToast();
 
   const handleAddToCart = (product: Product) => {
+    const cart = localStorage.getItem('cart');
+    let cartItems = cart ? JSON.parse(cart) : [];
+    
+    const existingItem = cartItems.find((item: { id: number }) => item.id === product.id);
+    
+    if (existingItem) {
+      cartItems = cartItems.map((item: { id: number; quantity: number }) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+    } else {
+      cartItems.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: 1
+      });
+    }
+    
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    window.dispatchEvent(new Event('storage'));
+    
     toast({
       title: "Added to Cart",
       description: `${product.name} has been added to your cart.`,
@@ -19,6 +43,7 @@ export const ProductGrid = ({ products }: ProductGridProps) => {
   };
 
   const handleBuyNow = (product: Product) => {
+    handleAddToCart(product);
     window.location.href = `/checkout/${product.id}`;
   };
 
