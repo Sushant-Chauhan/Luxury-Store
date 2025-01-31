@@ -1,6 +1,12 @@
 import { Product } from "@/types/product";
+import { fashionProducts } from "./categories/fashion";
+import { jewelryProducts } from "./categories/jewelry";
+import { electronicsProducts } from "./categories/electronics";
 
 export const products: Product[] = [
+  ...fashionProducts,
+  ...jewelryProducts,
+  ...electronicsProducts,
   {
     id: 1,
     name: "Premium Watch",
@@ -354,4 +360,17 @@ export const products: Product[] = [
     stockStatus: "In Stock",
     features: ["Heart rate monitor", "Sleep tracking", "Water resistant"]
   },
+];
+
+export const categories = [
+  "Fashion & Apparel",
+  "Jewelry & Accessories",
+  "Luxury Watches",
+  "Beauty & Skincare",
+  "Home & Décor",
+  "Electronics & Gadgets",
+  "Footwear & Handbags",
+  "Premium Spirits & Wine",
+  "Health & Wellness",
+  "Travel & Lifestyle"
 ];
