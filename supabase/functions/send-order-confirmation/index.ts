@@ -25,14 +25,14 @@ const handler = async (req: Request): Promise<Response> => {
     const { customerEmail, customerName }: OrderEmailRequest = await req.json();
 
     const emailResponse = await resend.emails.send({
-      from: "Lovable Store <onboarding@resend.dev>",
+      from: "Luxury Store <onboarding@resend.dev>",
       to: [customerEmail],
       subject: "Your Order Confirmation",
       html: `
         <h1>Thank you for your order, ${customerName}!</h1>
         <p>Your order has been successfully placed and will be delivered within 7 working days.</p>
         <p>Happy shopping!</p>
-        <p>Best regards,<br>The Lovable Store Team</p>
+        <p>Best regards,<br>The Luxury Store Team</p>
       `,
     });
 

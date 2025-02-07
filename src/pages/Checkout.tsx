@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,14 +11,19 @@ import { supabase } from "@/integrations/supabase/client";
 
 const Checkout = () => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return; // Prevent multiple submissions
+    
+    setIsSubmitting(true);
 
     try {
       // Send order confirmation email
@@ -31,17 +36,27 @@ const Checkout = () => {
 
       if (error) throw error;
 
+      // Clear the cart
+      localStorage.removeItem('cart');
+      
+      // Show success message
       toast({
         title: "Order Placed Successfully",
         description: "Thank you for your purchase! Check your email for order confirmation.",
       });
+
+      // Redirect to products page
+      navigate('/products');
+      
     } catch (error) {
       console.error('Error sending order confirmation:', error);
       toast({
-        title: "Order Placed",
-        description: "Your order was placed, but we couldn't send the confirmation email. Please contact support if needed.",
+        title: "Error",
+        description: "There was a problem placing your order. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -139,8 +154,12 @@ const Checkout = () => {
             )}
           </div>
 
-          <Button type="submit" className="w-full">
-            Place Order
+          <Button 
+            type="submit" 
+            className="w-full"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Processing..." : "Place Order"}
           </Button>
         </form>
       </div>
