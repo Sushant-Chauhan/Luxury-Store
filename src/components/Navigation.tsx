@@ -1,3 +1,4 @@
+
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
@@ -77,7 +78,7 @@ export const Navigation = () => {
         <NavigationMenuItem>
           {isLoggedIn ? (
             <div className="flex items-center gap-4">
-              <span className="text-sm text-muted-foreground">{user}</span>
+              <span className="text-sm text-muted-foreground">{user?.email}</span>
               <Button
                 variant="ghost"
                 size="sm"
