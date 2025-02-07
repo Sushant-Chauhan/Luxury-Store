@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
@@ -6,18 +7,42 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Checkout = () => {
   const { productId } = useParams();
   const { toast } = useToast();
   const [paymentMethod, setPaymentMethod] = useState("card");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Order Placed Successfully",
-      description: "Thank you for your purchase!",
-    });
+
+    try {
+      // Send order confirmation email
+      const { error } = await supabase.functions.invoke('send-order-confirmation', {
+        body: {
+          customerEmail: email,
+          customerName: `${firstName} ${lastName}`,
+        },
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Order Placed Successfully",
+        description: "Thank you for your purchase! Check your email for order confirmation.",
+      });
+    } catch (error) {
+      console.error('Error sending order confirmation:', error);
+      toast({
+        title: "Order Placed",
+        description: "Your order was placed, but we couldn't send the confirmation email. Please contact support if needed.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -32,11 +57,31 @@ const Checkout = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="firstName">First Name</Label>
-                <Input id="firstName" required />
+                <Input 
+                  id="firstName" 
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required 
+                />
               </div>
               <div>
                 <Label htmlFor="lastName">Last Name</Label>
-                <Input id="lastName" required />
+                <Input 
+                  id="lastName" 
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required 
+                />
+              </div>
+              <div className="md:col-span-2">
+                <Label htmlFor="email">Email</Label>
+                <Input 
+                  id="email" 
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required 
+                />
               </div>
               <div className="md:col-span-2">
                 <Label htmlFor="address">Address</Label>
