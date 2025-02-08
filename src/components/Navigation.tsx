@@ -41,7 +41,13 @@ export const Navigation = () => {
 
   return (
     <NavigationMenu className="max-w-full w-full justify-between mb-8 px-4">
-      <NavigationMenuList className="space-x-4">
+      <NavigationMenuList className="space-x-4 items-center">
+        <NavigationMenuItem className="mr-4">
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/luxury-logo.svg" alt="Luxury Store" className="h-8 w-8" />
+            <span className="font-serif text-xl">Luxury Store</span>
+          </Link>
+        </NavigationMenuItem>
         <NavigationMenuItem>
           <Link to="/" className={navigationMenuTriggerStyle()}>
             Home
