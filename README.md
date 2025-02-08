@@ -60,5 +60,7 @@ For any questions or support, feel free to reach out to us via email:
 📧 **sushantchauhan941.com**  
 🌐 **[www.luxurystore.com](https://myluxurystore.netlify.app/)**
 
+Follow me on LinkedIn: [Sushant C](https://www.linkedin.com/in/sushant-c-2017711b3/)
+
 Thank you for supporting luxury shopping! 🌟
 
