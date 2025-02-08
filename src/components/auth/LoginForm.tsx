@@ -51,14 +51,6 @@ export const LoginForm = () => {
 
   return (
     <div className="max-w-sm mx-auto p-6">
-      <Button 
-        variant="outline" 
-        className="w-full mb-6"
-        onClick={() => navigate("/products")}
-      >
-        Browse Products
-      </Button>
-
       <Tabs defaultValue="login" className="w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="login">Login</TabsTrigger>
@@ -115,6 +107,14 @@ export const LoginForm = () => {
           </form>
         </TabsContent>
       </Tabs>
+
+      <Button 
+        variant="outline" 
+        className="w-full mt-6"
+        onClick={() => navigate("/products")}
+      >
+        Browse Products
+      </Button>
     </div>
   );
 };
