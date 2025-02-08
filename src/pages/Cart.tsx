@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { ShoppingCart, Trash2, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface CartItem {
@@ -21,19 +21,22 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const { session } = useAuth();
 
-  useEffect(() => {
-    // Clear cart if not logged in
-    if (!session) {
-      setCartItems([]);
-      localStorage.removeItem('cart');
-      return;
-    }
+  // Redirect to login if not authenticated
+  if (!session) {
+    toast({
+      title: "Login Required",
+      description: "Please login to view your cart.",
+      variant: "destructive",
+    });
+    return <Navigate to="/login" replace />;
+  }
 
+  useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
-  }, [session]);
+  }, []);
 
   useEffect(() => {
     const newTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);

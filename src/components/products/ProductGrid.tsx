@@ -1,8 +1,11 @@
+
 import { Product } from "@/types/product";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface ProductGridProps {
   products: Product[];
@@ -10,8 +13,20 @@ interface ProductGridProps {
 
 export const ProductGrid = ({ products }: ProductGridProps) => {
   const { toast } = useToast();
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   const handleAddToCart = (product: Product) => {
+    if (!isLoggedIn) {
+      toast({
+        title: "Login Required",
+        description: "Please login to add items to your cart.",
+        variant: "destructive",
+      });
+      navigate('/login');
+      return;
+    }
+
     const cart = localStorage.getItem('cart');
     let cartItems = cart ? JSON.parse(cart) : [];
     
@@ -43,6 +58,16 @@ export const ProductGrid = ({ products }: ProductGridProps) => {
   };
 
   const handleBuyNow = (product: Product) => {
+    if (!isLoggedIn) {
+      toast({
+        title: "Login Required",
+        description: "Please login to make a purchase.",
+        variant: "destructive",
+      });
+      navigate('/login');
+      return;
+    }
+
     handleAddToCart(product);
     window.location.href = `/checkout/${product.id}`;
   };

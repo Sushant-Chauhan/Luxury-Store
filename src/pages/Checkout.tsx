@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,6 +8,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Checkout = () => {
   const { productId } = useParams();
@@ -18,15 +19,25 @@ const Checkout = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { session } = useAuth();
+
+  // Redirect to login if not authenticated
+  if (!session) {
+    toast({
+      title: "Login Required",
+      description: "Please login to proceed with checkout.",
+      variant: "destructive",
+    });
+    return <Navigate to="/login" replace />;
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSubmitting) return; // Prevent multiple submissions
+    if (isSubmitting) return;
     
     setIsSubmitting(true);
 
     try {
-      // Send order confirmation email
       const { error } = await supabase.functions.invoke('send-order-confirmation', {
         body: {
           customerEmail: email,
@@ -36,16 +47,13 @@ const Checkout = () => {
 
       if (error) throw error;
 
-      // Clear the cart
       localStorage.removeItem('cart');
       
-      // Show success message
       toast({
         title: "Order Placed Successfully",
         description: "Thank you for your purchase! Check your email for order confirmation.",
       });
 
-      // Redirect to products page
       navigate('/products');
       
     } catch (error) {
