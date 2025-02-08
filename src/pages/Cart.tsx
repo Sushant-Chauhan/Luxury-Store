@@ -1,9 +1,11 @@
+
 import { Navigation } from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { ShoppingCart, Trash2, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface CartItem {
   id: number;
@@ -17,18 +19,28 @@ const Cart = () => {
   const { toast } = useToast();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [total, setTotal] = useState(0);
+  const { session } = useAuth();
 
   useEffect(() => {
+    // Clear cart if not logged in
+    if (!session) {
+      setCartItems([]);
+      localStorage.removeItem('cart');
+      return;
+    }
+
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
-  }, []);
+  }, [session]);
 
   useEffect(() => {
     const newTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     setTotal(newTotal);
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+    if (cartItems.length > 0) {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
   }, [cartItems]);
 
   const removeFromCart = (id: number) => {

@@ -34,6 +34,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setSession(session);
       setUser(session?.user ?? null);
       setIsLoggedIn(!!session);
+      
+      // Clear cart on logout
+      if (!session) {
+        localStorage.removeItem('cart');
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -58,6 +63,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
+    // Clear cart on logout
+    localStorage.removeItem('cart');
   };
 
   return (
